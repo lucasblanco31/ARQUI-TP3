@@ -19,19 +19,125 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+//Definicion de Macros mediante directiva 'define'
+//<nombre>	<tamao>' <base>
+`define	HLT	    5'b00000	//Halt
+`define	STO	    5'b00001	//Store Variable
+`define	LD	    5'b00010	//Load Variable
+`define	LDI	    5'b00011	//Load Inmediate
+`define	ADD	    5'b00100	//Add Variable
+`define	ADDI	5'b00101	//Add Inmediate
+`define	SUB	    5'b00110	//Subtract Variable
+`define	SUBI    5'b00111	//Subtract Inmediate
 
 module decoder
     #(
     )
     (
-        input   wire    [4:0]   o_opcode    ,
-        output  wire            o_WrPC      ,
-        output  wire    [1:0]   o_SelA      ,
-        output  wire            o_SelB      ,
-        output  wire            o_WrAcc     ,
-        output  wire            o_Op        ,   
-        output  wire            o_WrRam     ,
-        output  wire            o_RdRam
+        input   wire    [4:0]   i_opcode    ,
+        output  reg             o_WrPC      ,
+        output  reg     [1:0]   o_SelA      ,
+        output  reg             o_SelB      ,
+        output  reg             o_WrAcc     ,
+        output  reg             o_Op        ,   
+        output  reg             o_WrRam     ,
+        output  reg             o_RdRam
     );
-
+    
+    always @(*) begin
+        case(i_opcode)
+            `HLT:
+            begin
+                o_WrPC      = 1'b0      ;
+                o_SelA      = 2'b11     ;
+                o_SelB      = 1'b0      ;
+                o_WrAcc     = 1'b0      ;
+                o_Op        = 1'b0      ;
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b0      ;    
+                
+            end
+            `STO: //DM[operand] ← ACC
+            begin
+                o_WrPC      = 1'b1      ;
+                o_SelA      = 2'b11     ;
+                o_SelB      = 1'b0      ;
+                o_WrAcc     = 1'b0      ;
+                o_Op        = 1'b0      ;
+                o_WrRam     = 1'b1      ;
+                o_RdRam     = 1'b0      ;    
+            end
+            `LD: //ACC ← DM[operand]
+            begin
+                o_WrPC      = 1'b1      ;
+                o_SelA      = 2'b00     ;
+                o_SelB      = 1'b0      ;
+                o_WrAcc     = 1'b1      ;
+                o_Op        = 1'b0      ;
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b1      ;    
+            end
+            `LDI: //ACC ← operand
+            begin
+                o_WrPC      = 1'b1      ;
+                o_SelA      = 2'b01     ;
+                o_SelB      = 1'b0      ;
+                o_WrAcc     = 1'b1      ;
+                o_Op        = 1'b0      ;
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b0      ;    
+            end
+            `ADD: //ACC ← ACC + DM[operand]
+            begin
+                o_WrPC      = 1'b1      ;
+                o_SelA      = 2'b10     ;
+                o_SelB      = 1'b0      ;
+                o_WrAcc     = 1'b1      ;
+                o_Op        = 1'b0      ; //suma
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b1      ;    
+            end
+            `ADDI: //ACC ← ACC + operand
+            begin
+                o_WrPC      = 1'b1      ;
+                o_SelA      = 2'b10     ;
+                o_SelB      = 1'b1      ;
+                o_WrAcc     = 1'b1      ;
+                o_Op        = 1'b0      ; //suma
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b0      ;    
+            end
+            `SUB: //ACC ← ACC - DM[operand]
+            begin
+                o_WrPC      = 1'b1      ;
+                o_SelA      = 2'b10     ;
+                o_SelB      = 1'b0      ;
+                o_WrAcc     = 1'b1      ;
+                o_Op        = 1'b1      ; //RESTA
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b1      ;    
+            end
+            `SUBI: //ACC ← ACC - operand
+            begin
+                o_WrPC      = 1'b1      ;
+                o_SelA      = 2'b10     ;
+                o_SelB      = 1'b1      ;
+                o_WrAcc     = 1'b1      ;
+                o_Op        = 1'b1      ; //RESTA
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b0      ;    
+            end
+            default:
+            begin
+                o_WrPC      = 1'b0      ;
+                o_SelA      = 2'b11     ;
+                o_SelB      = 1'b0      ;
+                o_WrAcc     = 1'b0      ;
+                o_Op        = 1'b0      ;
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b0      ;    
+                
+            end
+        endcase
+    end
 endmodule
