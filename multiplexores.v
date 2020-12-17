@@ -22,7 +22,7 @@
 
 module multiplexores
     #(
-        parameter NBITS_O = 11,
+        //parameter NBITS_O = 11,
         parameter NBITS_D = 16
     )
     (
@@ -30,8 +30,8 @@ module multiplexores
         input   wire     [1              :0]     i_SelA             ,
         input   wire                             i_SelB             ,
         input   wire                             i_WrAcc            ,
-        input   wire                             i_Op               ,   
-        input   wire     [NBITS_O-1      :0]     i_Operand          ,
+        //input   wire                             i_Op               ,   
+        //input   wire     [NBITS_O-1      :0]     i_Operand          ,
         input   wire     [NBITS_D-1      :0]     i_OutData          ,
         input   wire     [NBITS_D-1      :0]     i_ExtensionData    ,
         input   wire     [NBITS_D-1      :0]     i_ALU              ,

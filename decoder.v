@@ -32,16 +32,17 @@
 
 module decoder
     #(
+        parameter OPCODE = 5
     )
     (
-        input   wire    [4:0]   i_opcode    ,
-        output  reg             o_WrPC      ,
-        output  reg     [1:0]   o_SelA      ,
-        output  reg             o_SelB      ,
-        output  reg             o_WrAcc     ,
-        output  reg             o_Op        ,   
-        output  reg             o_WrRam     ,
-        output  reg             o_RdRam
+        input   wire    [OPCODE-1   :0]     i_opcode    ,
+        output  reg                         o_WrPC      ,
+        output  reg     [1          :0]     o_SelA      ,
+        output  reg                         o_SelB      ,
+        output  reg                         o_WrAcc     ,
+        output  reg                         o_Op        ,   
+        output  reg                         o_WrRam     ,
+        output  reg                         o_RdRam
     );
     
     always @(*) begin
