@@ -23,6 +23,7 @@
 module signal_extension
     #(
         parameter i_NBITS = 11,
+        parameter e_NBITS = 5,
         parameter o_NBITS = 16
     )
     (
@@ -35,6 +36,6 @@ module signal_extension
     
     always @(*)
         begin : extension
-            result_ext_reg  =   {{o_NBITS{0}}, i_signal} ;
+            result_ext_reg  =   {{e_NBITS{i_signal[i_NBITS-1]}}, i_signal} ;
         end
 endmodule
