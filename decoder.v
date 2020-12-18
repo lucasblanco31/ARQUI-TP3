@@ -35,7 +35,7 @@ module decoder
         parameter OPCODE = 5
     )
     (
-        input   wire    [OPCODE-1   :0]     i_opcode    ,
+        input   wire    [OPCODE-1   :0]     i_Opcode    ,
         output  reg                         o_WrPC      ,
         output  reg     [1          :0]     o_SelA      ,
         output  reg                         o_SelB      ,
@@ -46,7 +46,7 @@ module decoder
     );
     
     always @(*) begin
-        case(i_opcode)
+        case(i_Opcode)
             `HLT:
             begin
                 o_WrPC      = 1'b0      ;

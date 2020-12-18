@@ -39,7 +39,7 @@ module control
         output  wire     [NBITS_0-1      :0]     o_Operand            
     );
     
-    reg [NBITS_0-1  :0] pc;
+    //reg [NBITS_0-1  :0] pc;
     reg [NBITS_0-1  :0] pc_reg;
     wire wr_pc; 
     
@@ -50,11 +50,11 @@ module control
     begin
         if(i_reset)
         begin
-            pc              <=      {NBITS_D{1'b0}}         ;
+            //pc              <=      {NBITS_D{1'b0}}         ;
             pc_reg          <=      {NBITS_D{1'b0}}         ;
         end
         else if(wr_pc) 
-            pc_reg          <=      pc          +       1   ;
+            pc_reg          <=      pc_reg          +       1   ;
     end
     
     

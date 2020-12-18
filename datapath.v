@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module data_path
+module datapath
     #(
         parameter NBITS_O = 11,
         parameter NBITS_E = 5,
@@ -37,10 +37,10 @@ module data_path
         output  wire     [NBITS_D-1      :0]     o_InData                 
     );
     
-    reg [NBITS_D-1:0] ivalue;
-    reg [NBITS_D-1:0] opeACC;
-    reg [NBITS_D-1:0] opeB;
-    reg [NBITS_D-1:0] r_ALU;
+    wire    [NBITS_D-1:0]   ivalue  ;
+    wire    [NBITS_D-1:0]   opeACC  ;
+    wire    [NBITS_D-1:0]   opeB    ;
+    wire    [NBITS_D-1:0]   r_ALU   ;
     
     assign o_InData = opeACC;
     

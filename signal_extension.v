@@ -30,7 +30,8 @@ module signal_extension
         input   wire    [i_NBITS-1  :0]     i_signal        ,
         output  wire    [o_NBITS-1  :0]     o_ext_signal
     );
-                reg     [o_NBITS-1:0] result_ext_reg;
+    
+    reg     [o_NBITS-1:0] result_ext_reg;
                 
     assign o_ext_signal = result_ext_reg;
     
