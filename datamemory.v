@@ -30,13 +30,26 @@ module datamemory
         input   wire                        i_reset     ,
         input   wire                        i_Rd        ,
         input   wire                        i_Wr        ,
-        input   wire    [NBITS_O-1  :0]     i_Add       ,
+        input   wire    [NBITS_O-1  :0]     i_Addr       ,
         input   wire    [NBITS_D-1  :0]     i_InData    ,
         output  wire    [NBITS_D-1  :0]     o_OutData      
     );
     
     reg     [NBITS_D-1  :0]     data;
     reg     [NBITS_D-1  :0]     memory[CELDAS-1 :0];
+    
+    initial begin
+    memory[0] = 16'h0000 ;
+    memory[1] = 16'h0001 ;
+    memory[2] = 16'h0002 ;
+    memory[3] = 16'h0003 ;
+    memory[4] = 16'h0004 ;
+    memory[5] = 16'h0005 ;
+    memory[6] = 16'h0006 ;
+    memory[7] = 16'h0007 ;
+    memory[8] = 16'h0008 ;
+    memory[9] = 16'h0009 ;
+    end
     
     assign o_OutData = data;
     
@@ -46,9 +59,9 @@ module datamemory
             data            <=      {NBITS_D{1'b0}} ;
             
         else if(i_Wr)
-            memory[i_Add]   <=      i_InData        ;
+            memory[i_Addr]   <=      i_InData        ;
             
         else if(i_Rd)
-            data            <=      memory[i_Add]   ;
+            data            <=      memory[i_Addr]   ;
     end
 endmodule
