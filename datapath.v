@@ -42,8 +42,8 @@ module datapath
     wire    [NBITS_D-1:0]   opeACC  ;
     wire    [NBITS_D-1:0]   opeB    ;
     wire    [NBITS_D-1:0]   r_ALU   ;
-    wire    [NBITS_D-1:0]   ACC;
-    
+    wire    [NBITS_D-1:0]   ACC     ;
+        
     assign o_InData = opeACC;
     
     signal_extension
@@ -64,7 +64,7 @@ module datapath
     )
     u_multiplexores
     (
-        //.i_reset            (i_reset    ),
+        .i_reset            (i_reset    ),
         .i_SelA             (i_SelA     ),
         .i_SelB             (i_SelB     ),
         //.i_WrAcc            (i_WrAcc    ),
@@ -78,16 +78,16 @@ module datapath
     ACC
     #(
         .NBITS_D            (NBITS_D    )
-    ) 
-    u_ACC
+    )
     (
-        .i_clock            (i_clock    ),
+        .iclock             (i_clock    ),
         .i_reset            (i_reset    ),
         .i_ACC              (opeACC     ),
         .i_WrAcc            (i_WrAcc    ),
-        .o_ACC              (ACC        )
+        .o_ACC              (ACC        ),
     );
-    
+
+
     adder_subtractor
     #(
         .NBITS              (NBITS_D    )

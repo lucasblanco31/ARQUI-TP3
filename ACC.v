@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 22.12.2020 15:52:14
+// Create Date: 22.12.2020 15:53:02
 // Design Name: 
 // Module Name: ACC
 // Project Name: 
@@ -20,7 +20,30 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ACC(
-
-    );
+module ACC
+#(
+    parameter NBITS_D = 16
+)
+(
+    input   wire                i_clock     ,
+    input   wire                i_reset     ,
+    input   wire [NBITS_D-1:0]  i_ACC       ,
+    input   wire                i_WrAcc     ,
+    output  wire [NBITS_D-1:0]  o_ACC
+);
+   reg  [NBITS_D-1:0] ACC;
+   
+   assign o_ACC = ACC;
+      
+   always @(*) 
+   begin
+    if (i_reset)
+        ACC  <= {NBITS_D{1'b0}};
+    
+    else if (i_WrAcc) 
+        ACC  <= i_ACC;
+        
+    else
+        ACC  <= ACC;
+   end
 endmodule
