@@ -25,10 +25,8 @@ module multiplexores
         parameter NBITS_D = 16
     )
     (
-        //input   wire                             i_reset            ,
         input   wire     [1              :0]     i_SelA             ,
         input   wire                             i_SelB             ,
-        //input   wire                             i_WrAcc            ,
         input   wire     [NBITS_D-1      :0]     i_OutData          ,
         input   wire     [NBITS_D-1      :0]     i_ExtensionData    ,
         input   wire     [NBITS_D-1      :0]     i_ALU              ,
@@ -36,20 +34,29 @@ module multiplexores
         output  wire     [NBITS_D-1      :0]     o_SelB                 
     );
     
-    reg [NBITS_D-1  :0] ACC;
+    localparam [1:0]    
+                        Memory      = 2'b00,                   
+                        Extension   = 2'b01,                   
+                        ALU         = 2'b10;     
+    
+    reg [NBITS_D-1  :0] to_ACC;
     reg [NBITS_D-1  :0] SELB;
     
-    assign  o_ACC   =   ACC;
+    assign  o_ACC   =   to_ACC;
     assign  o_SelB  =   SELB;
 
     
     always @(*)
-    begin
+    begin    
         case(i_SelA)
-            2'b00:  ACC     <=      i_OutData         ;
-            2'b01:  ACC     <=      i_ExtensionData   ;
-            2'b10:  ACC     <=      i_ALU             ;
-            2'b11:  ACC     <=      ACC               ;
+            Memory:
+                to_ACC     <=      i_OutData         ;
+            Extension:  
+                to_ACC     <=      i_ExtensionData   ;
+            ALU:  
+                to_ACC     <=      i_ALU             ;
+            default:  
+                to_ACC     <=      {NBITS_D,1'b0}    ;
         endcase
     end
     

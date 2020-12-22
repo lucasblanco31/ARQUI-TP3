@@ -64,10 +64,9 @@ module datapath
     )
     u_multiplexores
     (
-        .i_reset            (i_reset    ),
+        //.i_reset            (i_reset    ),
         .i_SelA             (i_SelA     ),
         .i_SelB             (i_SelB     ),
-        //.i_WrAcc            (i_WrAcc    ),
         .i_OutData          (i_OutData  ),
         .i_ExtensionData    (ivalue     ),
         .i_ALU              (r_ALU      ),
@@ -79,12 +78,13 @@ module datapath
     #(
         .NBITS_D            (NBITS_D    )
     )
+    u_ACC
     (
-        .iclock             (i_clock    ),
+        .i_clock            (i_clock    ),
         .i_reset            (i_reset    ),
         .i_ACC              (opeACC     ),
         .i_WrAcc            (i_WrAcc    ),
-        .o_ACC              (ACC        ),
+        .o_ACC              (ACC        )
     );
 
 

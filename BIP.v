@@ -32,7 +32,8 @@ module BIP
         input   wire    i_reset    
         //output  wire    o_enable
     );
-    
+  
+    //reg                 clock   ;
     wire [NBITS_O-1:0]  PmAddr  ;
     wire [NBITS_D-1:0]  Data    ;
     wire                Rd      ;

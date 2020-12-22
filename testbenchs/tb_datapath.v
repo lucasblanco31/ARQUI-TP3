@@ -64,7 +64,7 @@ module tb_datapath();
     SelA = 2'b10;
     #15
     WrAcc = 1'b1;
-    #1
+    #2
     WrAcc = 1'b0;
     #1000
     $display("#############test ok##############");
