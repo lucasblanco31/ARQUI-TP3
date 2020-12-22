@@ -16,7 +16,8 @@ module cpu
         output  wire    [NBITS_O-1     :0]      o_DmAddr        ,
         output  wire                            o_Rd            ,
         output  wire                            o_Wr            ,
-        output  wire    [NBITS_D-1     :0]      o_InData                       
+        output  wire    [NBITS_D-1     :0]      o_InData        ,
+        output  wire                            o_Halt                     
     );
     
     wire     [NBITS_O-1     :0]      PmAddr      ;
@@ -53,7 +54,8 @@ module cpu
         .o_Op               (Op             ),
         .o_WrRam            (WrRam          ),
         .o_RdRam            (RdRam          ),
-        .o_Operand          (Operand        )
+        .o_Operand          (Operand        ),
+        .o_Halt             (o_Halt         )
     );
     
     datapath

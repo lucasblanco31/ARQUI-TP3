@@ -29,8 +29,9 @@ module BIP
         parameter CELDAS    =   10
     )
     (
-        input   wire    i_reset    
-        //output  wire    o_enable
+        input   wire                    i_reset ,
+        output  wire                    o_Halt  ,
+        output  wire [NBITS_D-1  :0]    o_ACC     
     );
   
     //reg                 clock   ;
@@ -41,6 +42,8 @@ module BIP
     wire [NBITS_O-1:0]  DmAddr  ;
     wire [NBITS_D-1:0]  InData  ;
     wire [NBITS_D-1:0]  OutData ;
+    
+    assign o_ACC = InData;
     
     cpu
     #(
@@ -58,7 +61,8 @@ module BIP
         .o_DmAddr       (DmAddr     ),
         .o_Rd           (Rd         ),
         .o_Wr           (Wr         ),
-        .o_InData       (InData     )
+        .o_InData       (InData     ),
+        .o_Halt         (o_Halt     )
     );
     
    programMemory

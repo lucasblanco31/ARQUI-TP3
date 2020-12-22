@@ -24,7 +24,8 @@ module decoder
         output  reg                         o_WrAcc     ,
         output  reg                         o_Op        ,   
         output  reg                         o_WrRam     ,
-        output  reg                         o_RdRam
+        output  reg                         o_RdRam     ,
+        output  reg                         o_Halt         
     );
     
     always @(*) begin
@@ -37,8 +38,8 @@ module decoder
                 o_WrAcc     = 1'b0      ;
                 o_Op        = 1'b0      ;
                 o_WrRam     = 1'b0      ;
-                o_RdRam     = 1'b0      ;    
-                
+                o_RdRam     = 1'b0      ;
+                o_Halt      = 1'b1      ;    
             end
             `STO: //DM[operand] ← ACC
             begin
@@ -48,7 +49,8 @@ module decoder
                 o_WrAcc     = 1'b0      ;
                 o_Op        = 1'b0      ;
                 o_WrRam     = 1'b1      ;
-                o_RdRam     = 1'b0      ;    
+                o_RdRam     = 1'b0      ;
+                o_Halt      = 1'b0      ;    
             end
             `LD: //ACC ← DM[operand]
             begin
@@ -58,7 +60,8 @@ module decoder
                 o_WrAcc     = 1'b1      ;
                 o_Op        = 1'b0      ;
                 o_WrRam     = 1'b0      ;
-                o_RdRam     = 1'b1      ;    
+                o_RdRam     = 1'b1      ;
+                o_Halt      = 1'b0      ;    
             end
             `LDI: //ACC ← operand
             begin
@@ -68,7 +71,8 @@ module decoder
                 o_WrAcc     = 1'b1      ;
                 o_Op        = 1'b0      ;
                 o_WrRam     = 1'b0      ;
-                o_RdRam     = 1'b0      ;    
+                o_RdRam     = 1'b0      ;
+                o_Halt      = 1'b0      ;    
             end
             `ADD: //ACC ← ACC + DM[operand]
             begin
@@ -78,7 +82,8 @@ module decoder
                 o_WrAcc     = 1'b1      ;
                 o_Op        = 1'b0      ; //suma
                 o_WrRam     = 1'b0      ;
-                o_RdRam     = 1'b1      ;    
+                o_RdRam     = 1'b1      ;
+                o_Halt      = 1'b0      ;    
             end
             `ADDI: //ACC ← ACC + operand
             begin
@@ -88,7 +93,8 @@ module decoder
                 o_WrAcc     = 1'b1      ;
                 o_Op        = 1'b0      ; //suma
                 o_WrRam     = 1'b0      ;
-                o_RdRam     = 1'b0      ;    
+                o_RdRam     = 1'b0      ;
+                o_Halt      = 1'b0      ;    
             end
             `SUB: //ACC ← ACC - DM[operand]
             begin
@@ -98,7 +104,8 @@ module decoder
                 o_WrAcc     = 1'b1      ;
                 o_Op        = 1'b1      ; //RESTA
                 o_WrRam     = 1'b0      ;
-                o_RdRam     = 1'b1      ;    
+                o_RdRam     = 1'b1      ;
+                o_Halt      = 1'b0      ;    
             end
             `SUBI: //ACC ← ACC - operand
             begin
@@ -108,7 +115,8 @@ module decoder
                 o_WrAcc     = 1'b1      ;
                 o_Op        = 1'b1      ; //RESTA
                 o_WrRam     = 1'b0      ;
-                o_RdRam     = 1'b0      ;    
+                o_RdRam     = 1'b0      ;
+                o_Halt      = 1'b0      ;    
             end
             default:
             begin
@@ -118,8 +126,8 @@ module decoder
                 o_WrAcc     = 1'b0      ;
                 o_Op        = 1'b0      ;
                 o_WrRam     = 1'b0      ;
-                o_RdRam     = 1'b0      ;    
-                
+                o_RdRam     = 1'b0      ;
+                o_Halt      = 1'b0      ;    
             end
         endcase
     end

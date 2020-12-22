@@ -44,7 +44,7 @@ module datapath
     wire    [NBITS_D-1:0]   r_ALU   ;
     wire    [NBITS_D-1:0]   ACC     ;
         
-    assign o_InData = opeACC;
+    assign o_InData = ACC;
     
     signal_extension
     #(

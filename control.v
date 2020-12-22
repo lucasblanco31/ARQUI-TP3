@@ -18,7 +18,8 @@ module control
         output  wire                             o_WrRam         ,
         output  wire                             o_RdRam         ,   
         output  wire     [NBITS_0-1      :0]     o_Operand       ,
-        output  wire     [OPCODE-1       :0]     o_Opcode           
+        output  wire     [OPCODE-1       :0]     o_Opcode        ,
+        output  wire                             o_Halt             
     );
     
     reg [NBITS_0-1  :0] pc_reg;
@@ -52,7 +53,8 @@ module control
         .o_WrAcc        (o_WrAcc                                    ),
         .o_Op           (o_Op                                       ),   
         .o_WrRam        (o_WrRam                                    ),
-        .o_RdRam        (o_RdRam                                    )
+        .o_RdRam        (o_RdRam                                    ),
+        .o_Halt         (o_Halt                                     )
     );
     
 endmodule
