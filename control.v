@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 17.12.2020 17:40:30
-// Design Name: 
-// Module Name: control
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module control
     #(
@@ -27,6 +7,7 @@ module control
         parameter OPCODE  = 5
     )
     (
+        input   wire                             i_clk           ,
         input   wire                             i_reset         ,
         input   wire     [NBITS_D-1     :0]      i_Instruction   ,
         output  wire     [NBITS_0-1     :0]      o_Addr          ,
@@ -36,25 +17,25 @@ module control
         output  wire                             o_Op            ,
         output  wire                             o_WrRam         ,
         output  wire                             o_RdRam         ,   
-        output  wire     [NBITS_0-1      :0]     o_Operand            
+        output  wire     [NBITS_0-1      :0]     o_Operand       ,
+        output  wire     [OPCODE-1       :0]     o_Opcode           
     );
     
-    //reg [NBITS_0-1  :0] pc;
     reg [NBITS_0-1  :0] pc_reg;
     wire wr_pc; 
     
     assign o_Addr       =   pc_reg;
-    assign o_Operand    =   i_Instruction[NBITS_D-OPCODE-1:0];
+    assign o_Operand    =   i_Instruction[NBITS_D-OPCODE-1 :0             ];
+    assign o_Opcode     =   i_Instruction[NBITS_D-1        :NBITS_D-OPCODE];
     
-    always @(*)
+    always @(negedge i_clk)
     begin
         if(i_reset)
         begin
-            //pc              <=      {NBITS_D{1'b0}}         ;
             pc_reg          <=      {NBITS_D{1'b0}}         ;
         end
         else if(wr_pc) 
-            pc_reg          <=      pc_reg          +       1   ;
+            pc_reg          <=      pc_reg          +      1;
     end
     
     
@@ -64,7 +45,7 @@ module control
     )
     u_decoder
     (
-        .i_Opcode       (i_Instruction[NBITS_D-1    :NBITS_D-OPCODE]),
+        .i_Opcode       (o_Opcode                                   ),
         .o_WrPC         (wr_pc                                      ),
         .o_SelA         (o_SelA                                     ),
         .o_SelB         (o_SelB                                     ),

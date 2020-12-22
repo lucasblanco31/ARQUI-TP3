@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 18.12.2020 11:03:10
-// Design Name: 
-// Module Name: cpu
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module cpu
     #(
@@ -28,6 +8,7 @@ module cpu
         parameter OPCODE  = 5                   
     )
     (
+        input   wire                            i_clk           ,
         input   wire                            i_reset         ,
         input   wire    [NBITS_D-1     :0]      i_Instruction   ,
         input   wire    [NBITS_D-1     :0]      i_OutData       ,
@@ -62,6 +43,7 @@ module cpu
     )
     u_control
     (
+        .i_clk              (i_clk          ),
         .i_reset            (i_reset        ),
         .i_Instruction      (i_Instruction  ),
         .o_Addr             (PmAddr         ),
