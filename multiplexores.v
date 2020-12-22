@@ -52,6 +52,8 @@ module multiplexores
                     2'b11:  ACC     <=      ACC               ;
                 endcase
             end
+        else
+                            ACC     <=      ACC               ;
     end
     
     always @(*)

@@ -76,7 +76,7 @@ module cpu
     
     datapath
     #(
-        .NBITS_0            (NBITS_O        ),
+        .NBITS_O            (NBITS_O        ),
         .NBITS_E            (NBITS_E        ),
         .NBITS_D            (NBITS_D        )
     )

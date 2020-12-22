@@ -22,15 +22,15 @@
 
 module BIP
     #(
-        parameter NBITS_O = 11,
-        parameter NBITS_E = 5,
-        parameter NBITS_D = 16,
-        parameter OPCODE = 5,
-        parameter CELDAS = 512
+        parameter NBITS_O   =   11  ,
+        parameter NBITS_E   =   5   ,
+        parameter NBITS_D   =   16  ,
+        parameter OPCODE    =   5   ,
+        parameter CELDAS    =   10
     )
     (
-        input   wire    i_reset    ,
-        output  wire    o_enable
+        input   wire    i_reset    
+        //output  wire    o_enable
     );
     
     wire [NBITS_O-1:0]  PmAddr  ;
@@ -53,6 +53,7 @@ module BIP
         .i_reset        (i_reset    ),
         .i_Instruction  (Data       ),
         .i_OutData      (OutData    ),
+        .o_PmAddr       (PmAddr     ),
         .o_DmAddr       (DmAddr     ),
         .o_Rd           (Rd         ),
         .o_Wr           (Wr         ),
@@ -62,7 +63,7 @@ module BIP
    programMemory
    #(
         .NBITS_O        (NBITS_O    ),
-        .NBITS_D        (NBITS_E    ),
+        .NBITS_D        (NBITS_D    ),
         .CELDAS         (CELDAS     )   
    )
    u_programMemory

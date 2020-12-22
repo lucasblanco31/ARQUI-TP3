@@ -19,9 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-`define	ADD	1'b0	//Salida-> A + B
-`define	SUB	1'b1	//Salida-> A - B
-
 module adder_subtractor
     #(
         parameter NBITS = 16
@@ -30,7 +27,7 @@ module adder_subtractor
         input   wire    [NBITS-1:0]     i_ACC       ,
         input   wire    [NBITS-1:0]     i_SelB      ,
         input   wire                    i_Op        ,
-        output  wire                    o_Result    
+        output  wire    [NBITS-1:0]     o_Result    
     );
     reg     signed  [NBITS-1:0] result_ope_reg;
                 
@@ -39,8 +36,8 @@ module adder_subtractor
     always @(*)
         begin : operaciones
             case(i_Op)
-                `ADD:       result_ope_reg  =    i_ACC  +   i_SelB   ;
-                `SUB:       result_ope_reg  =    i_ACC  -   i_SelB   ;
+                1'b0:       result_ope_reg  =    i_ACC  +   i_SelB   ;
+                1'b1:       result_ope_reg  =    i_ACC  -   i_SelB   ;
             endcase
         end
 endmodule

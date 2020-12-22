@@ -64,7 +64,7 @@ module control
     )
     u_decoder
     (
-        .i_opcode       (i_Instruction[NBITS_D-1    :NBITS_D-OPCODE]),
+        .i_Opcode       (i_Instruction[NBITS_D-1    :NBITS_D-OPCODE]),
         .o_WrPC         (wr_pc                                      ),
         .o_SelA         (o_SelA                                     ),
         .o_SelB         (o_SelB                                     ),
