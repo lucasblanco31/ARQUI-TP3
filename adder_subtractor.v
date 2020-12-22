@@ -29,7 +29,7 @@ module adder_subtractor
         input   wire                    i_Op        ,
         output  wire    [NBITS-1:0]     o_Result    
     );
-    reg     signed  [NBITS-1:0] result_ope_reg;
+    reg [NBITS-1:0] result_ope_reg;
                 
     assign o_Result = result_ope_reg;
     

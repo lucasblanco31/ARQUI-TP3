@@ -27,6 +27,7 @@ module datapath
         parameter NBITS_D = 16
     )
     (
+        input   wire                             i_clock            ,
         input   wire                             i_reset            ,
         input   wire     [1              :0]     i_SelA             ,
         input   wire                             i_SelB             ,
@@ -41,6 +42,7 @@ module datapath
     wire    [NBITS_D-1:0]   opeACC  ;
     wire    [NBITS_D-1:0]   opeB    ;
     wire    [NBITS_D-1:0]   r_ALU   ;
+    wire    [NBITS_D-1:0]   ACC;
     
     assign o_InData = opeACC;
     
@@ -62,15 +64,28 @@ module datapath
     )
     u_multiplexores
     (
-        .i_reset            (i_reset    ),
+        //.i_reset            (i_reset    ),
         .i_SelA             (i_SelA     ),
         .i_SelB             (i_SelB     ),
-        .i_WrAcc            (i_WrAcc    ),
+        //.i_WrAcc            (i_WrAcc    ),
         .i_OutData          (i_OutData  ),
         .i_ExtensionData    (ivalue     ),
         .i_ALU              (r_ALU      ),
         .o_ACC              (opeACC     ),
         .o_SelB             (opeB       )                
+    );
+    
+    ACC
+    #(
+        .NBITS_D            (NBITS_D    )
+    ) 
+    u_ACC
+    (
+        .i_clock            (i_clock    ),
+        .i_reset            (i_reset    ),
+        .i_ACC              (opeACC     ),
+        .i_WrAcc            (i_WrAcc    ),
+        .o_ACC              (ACC        )
     );
     
     adder_subtractor
@@ -79,7 +94,7 @@ module datapath
     )
     u_adder_subtractor
     (
-        .i_ACC              (opeACC     ),
+        .i_ACC              (ACC        ),
         .i_SelB             (opeB       ),
         .i_Op               (i_Op       ),
         .o_Result           (r_ALU      )
