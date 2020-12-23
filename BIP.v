@@ -29,6 +29,7 @@ module BIP
         parameter CELDAS    =   10
     )
     (
+        input   wire                    i_clk   ,
         input   wire                    i_reset ,
         output  wire                    o_Halt  ,
         output  wire [NBITS_D-1  :0]    o_ACC     
@@ -54,6 +55,7 @@ module BIP
     )
     u_cpu
     (
+        .i_clk          (i_clk      ),
         .i_reset        (i_reset    ),
         .i_Instruction  (Data       ),
         .i_OutData      (OutData    ),
@@ -73,6 +75,7 @@ module BIP
    )
    u_programMemory
    (
+        .i_clk          (i_clk      ),
         .i_reset        (i_reset    ),
         .i_Addr         (PmAddr     ),
         .o_Data         (Data       )
@@ -86,6 +89,7 @@ module BIP
    )
    u_datamemory
    (
+        .i_clk          (i_clk      ),
         .i_reset        (i_reset    ),
         .i_Rd           (Rd         ),
         .i_Wr           (Wr         ),

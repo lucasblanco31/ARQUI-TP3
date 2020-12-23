@@ -29,7 +29,7 @@ module control
     assign o_Operand    =   i_Instruction[NBITS_D-OPCODE-1 :0             ];
     assign o_Opcode     =   i_Instruction[NBITS_D-1        :NBITS_D-OPCODE];
     
-    always @(negedge i_clk)
+    always @(posedge i_clk)
     begin
         if(i_reset)
         begin

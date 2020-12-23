@@ -8,6 +8,7 @@ module programMemory
         parameter CELDAS  = 10
     )
     (
+        input   wire                        i_clk       ,
         input   wire                        i_reset     ,
         input   wire    [NBITS_O-1  :0]     i_Addr      ,
         output  wire    [NBITS_D-1  :0]     o_Data      
@@ -18,7 +19,7 @@ module programMemory
     
     assign o_Data = data;
     
-    always @(*)
+    always @(posedge i_clk)
     begin
         if(i_reset)
         begin

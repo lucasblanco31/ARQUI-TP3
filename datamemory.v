@@ -27,6 +27,7 @@ module datamemory
         parameter CELDAS  = 10
     )
     (
+        input   wire                        i_clk       ,
         input   wire                        i_reset     ,
         input   wire                        i_Rd        ,
         input   wire                        i_Wr        ,
@@ -53,7 +54,7 @@ module datamemory
     
     assign o_OutData = data;
     
-    always @(*)
+    always @(negedge i_clk)
     begin
         if(i_reset)
         begin

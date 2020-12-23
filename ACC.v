@@ -35,7 +35,7 @@ module ACC
    
    assign o_ACC = ACC;
       
-   always @( posedge i_clock) 
+   always @(posedge i_clock) 
    begin
     if (i_reset)
         ACC  <= {NBITS_D{1'b0}};
