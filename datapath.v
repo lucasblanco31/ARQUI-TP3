@@ -27,7 +27,7 @@ module datapath
         parameter NBITS_D = 16
     )
     (
-        input   wire                             i_clock            ,
+        input   wire                             i_clk              ,
         input   wire                             i_reset            ,
         input   wire     [1              :0]     i_SelA             ,
         input   wire                             i_SelB             ,
@@ -80,7 +80,7 @@ module datapath
     )
     u_ACC
     (
-        .i_clock            (i_clock    ),
+        .i_clk              (i_clk      ),
         .i_reset            (i_reset    ),
         .i_ACC              (opeACC     ),
         .i_WrAcc            (i_WrAcc    ),

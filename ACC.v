@@ -25,7 +25,7 @@ module ACC
     parameter NBITS_D = 16
 )
 (
-    input   wire                i_clock     ,
+    input   wire                i_clk     ,
     input   wire                i_reset     ,
     input   wire [NBITS_D-1:0]  i_ACC       ,
     input   wire                i_WrAcc     ,
@@ -35,7 +35,7 @@ module ACC
    
    assign o_ACC = ACC;
       
-   always @(posedge i_clock) 
+   always @(posedge i_clk) 
    begin
     if (i_reset)
         ACC  <= {NBITS_D{1'b0}};

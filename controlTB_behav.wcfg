@@ -12,12 +12,12 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="867843fs"></ZoomEndTime>
-      <Cursor1Time time="490344fs"></Cursor1Time>
+      <ZoomEndTime time="1320168fs"></ZoomEndTime>
+      <Cursor1Time time="1061757fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="189"></NameColumnWidth>
-      <ValueColumnWidth column_width="129"></ValueColumnWidth>
+      <ValueColumnWidth column_width="125"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="8" />
    <wvobject type="logic" fp_name="/tb_full/u_BIP/u_cpu/u_control/i_clk">
@@ -178,6 +178,7 @@
    <wvobject type="group" fp_name="group351">
       <obj_property name="label">DMemory</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/tb_full/u_BIP/u_datamemory/i_Rd">
          <obj_property name="ElementShortName">i_Rd</obj_property>
          <obj_property name="ObjectShortName">i_Rd</obj_property>
@@ -201,6 +202,7 @@
       <wvobject type="array" fp_name="/tb_full/u_BIP/u_datamemory/memory">
          <obj_property name="ElementShortName">memory[9:0][15:0]</obj_property>
          <obj_property name="ObjectShortName">memory[9:0][15:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

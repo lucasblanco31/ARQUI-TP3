@@ -66,6 +66,7 @@ module cpu
     )
     u_datapath
     (
+        .i_clk              (i_clk          ),
         .i_reset            (i_reset        ),
         .i_SelA             (SelA           ),
         .i_SelB             (SelB           ),
