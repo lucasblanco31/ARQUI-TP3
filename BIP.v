@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module BIP
+module bip
     #(
         parameter NBITS_O   =   11  ,
         parameter NBITS_E   =   5   ,
