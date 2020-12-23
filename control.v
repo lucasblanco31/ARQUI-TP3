@@ -18,12 +18,12 @@ module control
         output  wire                             o_WrRam         ,
         output  wire                             o_RdRam         ,   
         output  wire     [NBITS_0-1      :0]     o_Operand       ,
-        output  wire     [OPCODE-1       :0]     o_Opcode        ,
         output  wire                             o_Halt             
     );
     
-    reg [NBITS_0-1  :0] pc_reg;
-    wire wr_pc; 
+    reg         [NBITS_0-1  :0]         pc_reg;
+    wire                                wr_pc; 
+    wire        [OPCODE-1   :0]         o_Opcode;
     
     assign o_Addr       =   pc_reg;
     assign o_Operand    =   i_Instruction[NBITS_D-OPCODE-1 :0             ];
