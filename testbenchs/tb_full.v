@@ -9,10 +9,10 @@ module tb_full();
     localparam OPCODE    =    5;
     localparam CELDAS    =   10;
     //UART PARAMETERS
-    localparam  DBIT        =          16;
+    localparam  DBIT        =          8;
     localparam  SBTICK      =          16;
     localparam  SIZ        =           8;
-    localparam  DIV         =          33; //10Mhz -> 19200baudrate
+    localparam  DIV         =          6; //10Mhz -> 115000baudrate 
     
     wire                            o_halt;
     wire        [NBITS_D-1  :0]     o_acc;
@@ -20,29 +20,56 @@ module tb_full();
     reg         rst;
     reg         clk;
     
-    reg                             i_start;
-    wire                            i_stick;
-    wire                            o_stick; 
-    reg         [DBIT-1:0]          i_data;
+    reg                              i_start;
+    wire                             i_stick;
+    wire                             o_stick; 
+    reg         [DBIT-1 :0]          i_data;
+    reg         [1      :0]          count;
+    reg         [NBITS_D:0]          acc;
+    wire                             tx_done;
        
     
     initial begin
       clk       = 1'b0;
       rst       = 1'b1;
       i_start   = 1'b0;
+      i_data    = {DBIT-1{1'b0}};
+      count     = 1'b0;
       #100
       rst       = 1'b0;
-      #60000
+      #200000
       $finish();         
     end
     
-    always @*
+    always @(posedge clk)
     begin
-        if(o_halt)
-            begin
-                i_start =   1'b0;
-                i_data  =   o_acc;
-            end
+        case(count)
+            1'b0:
+                begin
+                    if(o_halt)
+                    begin
+                        acc     =   o_acc;
+                        i_data  =   acc[DBIT-1:   0];
+                        i_start =   1'b1;
+                        count   =   count + 1;
+                    end
+                end
+            1'b1:
+                begin
+                    i_start     =   1'b0;
+                    if(tx_done)
+                    begin
+                        i_data  =   acc[NBITS_D-1: DBIT];
+                        i_start =   1'b1;
+                        count   =   count + 1;
+                    end
+                end
+            default:
+                begin
+                    i_start     =   1'b0;
+                    count       =   1'b0;
+                end
+        endcase
     end
      
     always begin
@@ -74,11 +101,12 @@ module tb_full();
     )
     u_uart_tx
     (
-      .i_clk            (clk        ),
-      .i_reset          (rst        ),
-      .i_tx_start       (i_start    ),
-      .i_s_tick         (i_stick    ),
-      .i_din            (i_data     )
+      .i_clk             (clk        ),
+      .i_reset           (rst        ),
+      .i_tx_start        (i_start    ),
+      .i_s_tick          (i_stick    ),
+      .i_din             (i_data     ),
+      .o_tx_done         (tx_done    )
     );
     
     mod_m_counter  
