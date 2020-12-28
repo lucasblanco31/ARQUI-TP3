@@ -40,7 +40,7 @@ module tb_full();
       
       #100
       rst       = 1'b0;
-      #400000
+      #200000
       $finish();         
     end
     
@@ -97,23 +97,23 @@ module tb_full();
     
     uart_rx
     #(
-      .DBIT             (DBIT      ),
-      .SB_TICK          (SBTICK     )
+        .DBIT               (DBIT           ),
+        .SB_TICK            (SBTICK         )
     )
     u_uart_rx
     (
-      .i_clk             (clk        ),
-      .i_reset           (rst        ),
-      .i_rx              (rx_in      ),
-      .i_s_tick          (i_stick    ),
-      .o_rx_done         (rx_done    ),
-      .o_rx              (rx_data    )
+        .i_clk              (clk            ),
+        .i_reset            (rst            ),
+        .i_rx               (rx_in          ),
+        .i_s_tick           (i_stick        ),
+        .o_rx_done          (rx_done        ),
+        .o_rx               (rx_data        )
     );
     
     mod_m_counter  
     #(  
-        .N                (SIZ      ),
-        .M                (DIV      ) 
+        .N                  (SIZ            ),
+        .M                  (DIV            ) 
     )
     u_m_counter  
     (  
@@ -122,8 +122,8 @@ module tb_full();
         .o_max_tick       (o_stick    )
   ); 
   
-   assign i_stick = o_stick;
-   assign tx_out  = rx_in;
+   assign i_stick =     o_stick;
+   assign rx_in   =     tx_out;
     
 endmodule
  

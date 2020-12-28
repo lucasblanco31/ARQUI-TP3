@@ -23,22 +23,22 @@ module top
     wire                            o_halt;
     wire        [NBITS_D-1  :0]     o_acc;    
     
-    wire                             i_stick;
-    wire                             o_stick; 
-    wire                             tx_done;
+    wire                            i_stick;
+    wire                            o_stick; 
+    wire                            tx_done;
     
-    reg                              i_start;
-    reg         [DBIT-1 :0]          i_data;
+    reg                             i_start;
+    reg         [DBIT-1 :0]         i_data;
     
-    reg         [NBITS_D:0]          acc;
+    reg         [NBITS_D:0]         acc;
     
-    reg                              count;
+    reg         [      2:0]         count;
        
    
     always @(posedge i_clk)
     begin
         case(count)
-            1'b0:
+            2'b00:
                 begin
                     if(o_halt)
                     begin
@@ -48,7 +48,7 @@ module top
                         count   =   count + 1;
                     end
                 end
-            1'b1:
+            2'b01:
                 begin
                     i_start     =   1'b0;
                     if(tx_done)
@@ -58,10 +58,16 @@ module top
                         count   =   count + 1;
                     end
                 end
+            2'b10:
+                begin
+                    i_start     =   1'b0;
+                    count       =   2'b00;
+                end
+                            
             default:
                 begin
                     i_start     =   1'b0;
-                    count       =   1'b0;
+                    count       =   2'b00;
                 end
         endcase
     end    
@@ -90,7 +96,7 @@ module top
     u_uart_tx
     (
         .i_clk              (i_clk          ),
-        .i_reset            (rst            ),
+        .i_reset            (i_rst          ),
         .i_tx_start         (i_start        ),
         .i_s_tick           (i_stick        ),
         .i_din              (i_data         ),
@@ -106,7 +112,7 @@ module top
     u_m_counter  
     (  
         .i_clk              (i_clk      ),
-        .i_reset            (rst        ),  
+        .i_reset            (i_rst      ),  
         .o_max_tick         (o_stick    )
     ); 
   
