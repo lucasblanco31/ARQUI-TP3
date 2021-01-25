@@ -29,6 +29,8 @@ module uart_rx
     reg     [2:0]      n_next;
     reg     [7:0]      b_reg;
     reg     [7:0]      b_next;
+    reg                rx_done_next;
+
 // bodv
 // FSMD state&data
  
@@ -39,6 +41,7 @@ module uart_rx
             s_reg       <=  0;
             n_reg       <=  0;
             b_reg       <=  0;
+            o_rx_done   <=  0;
         end
     else
         begin
@@ -46,12 +49,13 @@ module uart_rx
             s_reg       <=  s_next;
             n_reg       <=  n_next;
             b_reg       <=  b_next;
+            o_rx_done   <=  rx_done_next;
         end
 // FSMD next-state logic
     always @*
     begin
         state_next          =   state_reg;
-        o_rx_done           =   1'b0;
+        rx_done_next        =   o_rx_done;
         s_next              =   s_reg;
         n_next              =   n_reg;
         b_next              =   b_reg;
@@ -90,7 +94,7 @@ module uart_rx
                     if(s_reg == (SB_TICK-1))
                     begin
                         state_next      = idle;
-                        o_rx_done    = 1'b1;
+                        rx_done_next    = 1'b1;
                     end
                 else
                     s_next      =   s_reg + 1;

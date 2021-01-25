@@ -76,7 +76,7 @@ module bip
    u_programMemory
    (
         .i_clk          (i_clk      ),
-        .i_reset        (i_reset    ),
+        //.i_reset        (i_reset    ),
         .i_Addr         (PmAddr     ),
         .o_Data         (Data       )
    );

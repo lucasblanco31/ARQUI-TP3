@@ -35,7 +35,7 @@ module ACC
    
    assign o_ACC = ACC;
       
-   always @(posedge i_clk) 
+   always @(posedge i_clk, posedge i_reset) 
    begin
     if (i_reset)
         ACC  <= {NBITS_D{1'b0}};

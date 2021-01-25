@@ -34,6 +34,7 @@ module uart_tx
     reg     [7:0]      b_next;
     reg                tx_reg;
     reg                tx_next;
+    reg                tx_done_next;
     
 // body
 // FSMD state & data registers
@@ -45,6 +46,7 @@ module uart_tx
                 n_reg       <=  0;
                 b_reg       <=  0 ;
                 tx_reg      <=  1'b1;
+                o_tx_done   <=  1'b0;
             end
         else
             begin
@@ -53,12 +55,13 @@ module uart_tx
                 n_reg       <=  n_next;
                 b_reg       <=  b_next;
                 tx_reg      <=  tx_next;
+                o_tx_done   <=  tx_done_next;
         end
 // FSMD next_state  logic & functional units
     always @*
     begin
         state_next      =   state_reg;
-        o_tx_done    =   1'b0;
+        tx_done_next    =   o_tx_done;
         s_next          =   s_reg;
         n_next          =   n_reg;
         b_next          =   b_reg;
@@ -67,6 +70,7 @@ module uart_tx
             idle:
                 begin
                     tx_next = 1'b1;
+                    tx_done_next   =  1'b0;
                     if(i_tx_start)
                         begin
                             state_next  =   start;
@@ -110,7 +114,7 @@ module uart_tx
                         if(s_reg==(SB_TICK - 1 ))
                         begin
                             state_next      =   idle;
-                            o_tx_done  =   1'b1;
+                            tx_done_next  =   1'b1;
                         end
                     else
                         s_next  =   s_reg + 1;

@@ -110,7 +110,8 @@ module tb_full();
         .o_rx               (rx_data        )
     );
     
-    mod_m_counter  
+    mod_m_counter
+    //m_counter  
     #(  
         .N                  (SIZ            ),
         .M                  (DIV            ) 
