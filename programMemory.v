@@ -28,8 +28,9 @@ module programMemory
         memory[4]       <=      16'b00110_000_0000_0010 ; //Substract variable in 0x02 => ACC=0x06  
         memory[5]       <=      16'b00100_000_0000_0011 ; //Add variable in 0x03 => ACC=0x09
         memory[6]       <=      16'b00001_000_0000_1000 ; //Store in 0x08 => ACC=0x09
-        memory[7]       <=      16'b00011_000_0000_0011 ; //Load immediate 0x03 => ACC=0x03
-        memory[8]       <=      16'b00010_000_0000_1000 ; //Load variable 0x08 => ACC=0x09
+        //memory[7]       <=      16'b00011_000_0000_0011 ; //Load immediate 0x03 => ACC=0x03
+        memory[7]       <=      16'b00010_000_0000_1000 ; //Load variable 0x08 => ACC=0x09
+        memory[8]       <=      16'b00111_000_0000_0001 ; //Substract innmediate 0x01 => ACC=0x08
         memory[9]       <=      16'b00000_000_0000_0000 ; // Halt       
     end
     
