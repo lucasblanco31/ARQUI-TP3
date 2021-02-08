@@ -35,7 +35,7 @@ module top
     reg         [      2:0]         count;
        
    
-    always @(posedge i_clk)
+    always @(negedge i_clk)
     begin
         case(count)
             2'b00:
@@ -61,9 +61,11 @@ module top
             2'b10:
                 begin
                     i_start     =   1'b0;
-                    count       =   2'b00;
-                end
-                            
+                    if(tx_done)
+                    begin
+                        count       =   2'b00;
+                    end
+                end                        
             default:
                 begin
                     i_start     =   1'b0;
