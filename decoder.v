@@ -18,6 +18,7 @@ module decoder
     )
     (
         input   wire    [OPCODE-1   :0]     i_Opcode    ,
+    //    input   wire                        i_rst       ,
         output  reg                         o_WrPC      ,
         output  reg     [1          :0]     o_SelA      ,
         output  reg                         o_SelB      ,
@@ -28,7 +29,7 @@ module decoder
         output  reg                         o_Halt         
     );
     
-    always @(*) begin
+    always @(i_Opcode) begin              
         case(i_Opcode)
             `HLT:
             begin
@@ -41,7 +42,7 @@ module decoder
                 o_RdRam     = 1'b0      ;
                 o_Halt      = 1'b1      ;    
             end
-            `STO: //DM[operand] ← ACC
+            `STO: //DM[operand] â†? ACC
             begin
                 o_WrPC      = 1'b1      ;
                 o_SelA      = 2'b11     ;
@@ -52,7 +53,7 @@ module decoder
                 o_RdRam     = 1'b0      ;
                 o_Halt      = 1'b0      ;    
             end
-            `LD: //ACC ← DM[operand]
+            `LD: //ACC â†? DM[operand]
             begin
                 o_WrPC      = 1'b1      ;
                 o_SelA      = 2'b00     ;
@@ -63,7 +64,7 @@ module decoder
                 o_RdRam     = 1'b1      ;
                 o_Halt      = 1'b0      ;    
             end
-            `LDI: //ACC ← operand
+            `LDI: //ACC â†? operand
             begin
                 o_WrPC      = 1'b1      ;
                 o_SelA      = 2'b01     ;
@@ -74,7 +75,7 @@ module decoder
                 o_RdRam     = 1'b0      ;
                 o_Halt      = 1'b0      ;    
             end
-            `ADD: //ACC ← ACC + DM[operand]
+            `ADD: //ACC â†? ACC + DM[operand]
             begin
                 o_WrPC      = 1'b1      ;
                 o_SelA      = 2'b10     ;
@@ -85,7 +86,7 @@ module decoder
                 o_RdRam     = 1'b1      ;
                 o_Halt      = 1'b0      ;    
             end
-            `ADDI: //ACC ← ACC + operand
+            `ADDI: //ACC â†? ACC + operand
             begin
                 o_WrPC      = 1'b1      ;
                 o_SelA      = 2'b10     ;
@@ -96,7 +97,7 @@ module decoder
                 o_RdRam     = 1'b0      ;
                 o_Halt      = 1'b0      ;    
             end
-            `SUB: //ACC ← ACC - DM[operand]
+            `SUB: //ACC â†? ACC - DM[operand]
             begin
                 o_WrPC      = 1'b1      ;
                 o_SelA      = 2'b10     ;
@@ -107,7 +108,7 @@ module decoder
                 o_RdRam     = 1'b1      ;
                 o_Halt      = 1'b0      ;    
             end
-            `SUBI: //ACC ← ACC - operand
+            `SUBI: //ACC â†? ACC - operand
             begin
                 o_WrPC      = 1'b1      ;
                 o_SelA      = 2'b10     ;
@@ -131,4 +132,19 @@ module decoder
             end
         endcase
     end
+  /*  always @(*)
+        begin
+        if(i_rst)
+            begin 
+                o_WrPC      = 1'b1      ;
+                o_SelA      = 2'b11     ;
+                o_SelB      = 1'b0      ;
+                o_WrAcc     = 1'b0      ;
+                o_Op        = 1'b0      ; 
+                o_WrRam     = 1'b0      ;
+                o_RdRam     = 1'b0      ;
+                o_Halt      = 1'b0      ;
+            end
+        end
+        */ 
 endmodule
