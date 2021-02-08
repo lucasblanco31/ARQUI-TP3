@@ -47,6 +47,7 @@ module control
     u_decoder
     (
         .i_Opcode       (o_Opcode                                   ),
+       // .i_rst          (i_reset                                    ),
         .o_WrPC         (wr_pc                                      ),
         .o_SelA         (o_SelA                                     ),
         .o_SelB         (o_SelB                                     ),
