@@ -15,8 +15,10 @@ module tb_full();
     localparam  DIV      =    6; //10Mhz -> 115000baudrate 
     
    
-    reg         rst;
+    reg         rst_clk; //reset del clock
+    reg         rst;    //reset del sistema que tiene que ser despues de que el clk_wzd se estabiliza
     reg         clk;
+    wire        locked;
     
     
     reg         [NBITS_D-1 :0]       outData;         
@@ -28,16 +30,24 @@ module tb_full();
     wire                             rx_in;
     wire                             rx_done;
     wire        [DBIT-1    :0]       rx_data;
-
-       
-    
+        
     initial begin
+      #10
       clk       = 1'b0;
+      rst_clk   = 1'b0;
+      rst       = 1'b0;
+   
+      while(locked != 1'b1) begin
+        #10
+        rst_clk = 1'b1;
+      end
+      
+      #100
+      rst_clk = 1'b0;
+      rst     = 1'b0;
+      
       count     = 1'b0;
       outData   = {NBITS_D{1'b0}};
-      rst       = 1'b1;
-   
-      
       #100
       rst       = 1'b0;
       #200000
@@ -92,7 +102,9 @@ module tb_full();
     (
         .i_clk              (clk            ),
         .i_rst              (rst            ),
-        .o_tx               (tx_out         )         
+        .i_rst_clk          (rst_clk        ),
+        .o_tx               (tx_out         ),
+        .o_locked           (locked         )         
     );
     
     uart_rx

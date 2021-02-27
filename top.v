@@ -16,8 +16,10 @@ module top
     )
     (
         input       wire        i_clk,
+        input       wire        i_rst_clk,
         input       wire        i_rst,
-        output      wire        o_tx
+        output      wire        o_tx,
+        output      wire        o_locked
     );
       
     wire                            o_halt;
@@ -27,6 +29,8 @@ module top
     wire                            o_stick; 
     wire                            tx_done;
     
+    wire                            clk_out1;
+    
     reg                             i_start;
     reg         [DBIT-1 :0]         i_data;
     
@@ -35,7 +39,7 @@ module top
     reg         [      2:0]         count;
        
    
-    always @(negedge i_clk)
+    always @(negedge clk_out1)
     begin
         case(count)
             2'b00:
@@ -84,7 +88,7 @@ module top
     )
     u_bip
     (
-        .i_clk              (i_clk          ),
+        .i_clk              (clk_out1       ),
         .i_reset            (i_rst          ),
         .o_Halt             (o_halt         ),
         .o_ACC              (o_acc          )              
@@ -97,7 +101,7 @@ module top
     )
     u_uart_tx
     (
-        .i_clk              (i_clk          ),
+        .i_clk              (clk_out1       ),
         .i_reset            (i_rst          ),
         .i_tx_start         (i_start        ),
         .i_s_tick           (i_stick        ),
@@ -113,11 +117,19 @@ module top
     )
     u_m_counter  
     (  
-        .i_clk              (i_clk      ),
+        .i_clk              (clk_out1   ),
         .i_reset            (i_rst      ),  
         .o_max_tick         (o_stick    )
     ); 
-  
+
+    clk_wiz_0 my_clock(
+    
+        .clk_out1           (clk_out1   ),
+        .reset              (i_rst_clk  ),
+        .locked             (o_locked   ),
+        .clk_in1            (i_clk      )
+        
+    );  
    assign i_stick = o_stick;
     
 endmodule
