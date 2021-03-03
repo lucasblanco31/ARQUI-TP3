@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="tb_full_behav.wdb" id="1">
+      <db_ref path="tb_full_time_synth.wdb" id="1">
          <top_modules>
             <top_module name="glbl" />
             <top_module name="tb_full" />
@@ -12,230 +12,208 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="908001fs"></ZoomEndTime>
+      <ZoomEndTime time="2119097fs"></ZoomEndTime>
       <Cursor1Time time="200000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="164"></NameColumnWidth>
-      <ValueColumnWidth column_width="153"></ValueColumnWidth>
+      <ValueColumnWidth column_width="141"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="11" />
-   <wvobject fp_name="/tb_full/rst" type="logic">
-      <obj_property name="ElementShortName">rst</obj_property>
-      <obj_property name="ObjectShortName">rst</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_full/clk" type="logic">
+   <WVObjectSize size="13" />
+   <wvobject type="logic" fp_name="/tb_full/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/ACC" type="array">
-      <obj_property name="ElementShortName">ACC[15:0]</obj_property>
-      <obj_property name="ObjectShortName">ACC[15:0]</obj_property>
+   <wvobject type="logic" fp_name="/tb_full/u_top/i_rst_clk">
+      <obj_property name="ElementShortName">i_rst_clk</obj_property>
+      <obj_property name="ObjectShortName">i_rst_clk</obj_property>
    </wvobject>
-   <wvobject fp_name="group317" type="group">
+   <wvobject type="logic" fp_name="/tb_full/u_top/o_locked">
+      <obj_property name="ElementShortName">o_locked</obj_property>
+      <obj_property name="ObjectShortName">o_locked</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_full/u_top/clk_out1">
+      <obj_property name="ElementShortName">clk_out1</obj_property>
+      <obj_property name="ObjectShortName">clk_out1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_full/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group317">
       <obj_property name="label">BIP</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/tb_full/u_top/u_bip/Data" type="array">
-         <obj_property name="ElementShortName">Data[15:0]</obj_property>
-         <obj_property name="ObjectShortName">Data[15:0]</obj_property>
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/Data">
+         <obj_property name="ElementShortName">Data[14:0]</obj_property>
+         <obj_property name="ObjectShortName">Data[14:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/PmAddr" type="array">
-         <obj_property name="ElementShortName">PmAddr[10:0]</obj_property>
-         <obj_property name="ObjectShortName">PmAddr[10:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/pc_reg" type="array">
-         <obj_property name="ElementShortName">pc_reg[10:0]</obj_property>
-         <obj_property name="ObjectShortName">pc_reg[10:0]</obj_property>
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/PmAddr">
+         <obj_property name="ElementShortName">PmAddr[3:0]</obj_property>
+         <obj_property name="ObjectShortName">PmAddr[3:0]</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="group327" type="group">
+   <wvobject type="group" fp_name="group327">
       <obj_property name="label">Decoder</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/i_Opcode" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/i_Opcode">
          <obj_property name="ElementShortName">i_Opcode[4:0]</obj_property>
          <obj_property name="ObjectShortName">i_Opcode[4:0]</obj_property>
          <obj_property name="CustomSignalColor">#FFA500</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
-      <wvobject fp_name="group205" type="group">
+      <wvobject type="group" fp_name="group205">
          <obj_property name="label">flags</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_WrPC" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_WrPC">
             <obj_property name="ElementShortName">o_WrPC</obj_property>
             <obj_property name="ObjectShortName">o_WrPC</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_SelA" type="array">
+         <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_SelA">
             <obj_property name="ElementShortName">o_SelA[1:0]</obj_property>
             <obj_property name="ObjectShortName">o_SelA[1:0]</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_SelB" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_SelB">
             <obj_property name="ElementShortName">o_SelB</obj_property>
             <obj_property name="ObjectShortName">o_SelB</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_WrAcc" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_WrAcc">
             <obj_property name="ElementShortName">o_WrAcc</obj_property>
             <obj_property name="ObjectShortName">o_WrAcc</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_Op" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_Op">
             <obj_property name="ElementShortName">o_Op</obj_property>
             <obj_property name="ObjectShortName">o_Op</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_WrRam" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_WrRam">
             <obj_property name="ElementShortName">o_WrRam</obj_property>
             <obj_property name="ObjectShortName">o_WrRam</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_RdRam" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_RdRam">
             <obj_property name="ElementShortName">o_RdRam</obj_property>
             <obj_property name="ObjectShortName">o_RdRam</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_Halt" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/u_decoder/o_Halt">
             <obj_property name="ElementShortName">o_Halt</obj_property>
             <obj_property name="ObjectShortName">o_Halt</obj_property>
          </wvobject>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="group1101" type="group">
+   <wvobject type="group" fp_name="group1101">
       <obj_property name="label">Control</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/o_Halt" type="logic">
+      <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/o_Halt">
          <obj_property name="ElementShortName">o_Halt</obj_property>
          <obj_property name="ObjectShortName">o_Halt</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/i_Instruction" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/i_Instruction">
          <obj_property name="ElementShortName">i_Instruction[15:0]</obj_property>
          <obj_property name="ObjectShortName">i_Instruction[15:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/o_Addr" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_cpu/u_control/o_Addr">
          <obj_property name="ElementShortName">o_Addr[10:0]</obj_property>
          <obj_property name="ObjectShortName">o_Addr[10:0]</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="group335" type="group">
+   <wvobject type="group" fp_name="group335">
       <obj_property name="label">Datapath</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/opeACC" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/opeACC">
          <obj_property name="ElementShortName">opeACC[15:0]</obj_property>
          <obj_property name="ObjectShortName">opeACC[15:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/r_ALU" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/r_ALU">
          <obj_property name="ElementShortName">r_ALU[15:0]</obj_property>
          <obj_property name="ObjectShortName">r_ALU[15:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/ivalue" type="array">
-         <obj_property name="ElementShortName">ivalue[15:0]</obj_property>
-         <obj_property name="ObjectShortName">ivalue[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/u_adder_subtractor/i_SelB" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/u_adder_subtractor/i_SelB">
          <obj_property name="ElementShortName">i_SelB[15:0]</obj_property>
          <obj_property name="ObjectShortName">i_SelB[15:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/u_adder_subtractor/i_Op" type="logic">
+      <wvobject type="logic" fp_name="/tb_full/u_top/u_bip/u_cpu/u_datapath/u_adder_subtractor/i_Op">
          <obj_property name="ElementShortName">i_Op</obj_property>
          <obj_property name="ObjectShortName">i_Op</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="group347" type="group">
+   <wvobject type="group" fp_name="group347">
       <obj_property name="label">PMemory</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_programMemory/memory" type="array">
-         <obj_property name="ElementShortName">memory[9:0][15:0]</obj_property>
-         <obj_property name="ObjectShortName">memory[9:0][15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_programMemory/data" type="array">
-         <obj_property name="ElementShortName">data[15:0]</obj_property>
-         <obj_property name="ObjectShortName">data[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_programMemory/i_Addr" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_programMemory/i_Addr">
          <obj_property name="ElementShortName">i_Addr[10:0]</obj_property>
          <obj_property name="ObjectShortName">i_Addr[10:0]</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="group351" type="group">
+   <wvobject type="group" fp_name="group351">
       <obj_property name="label">DMemory</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_datamemory/memory" type="array">
-         <obj_property name="ElementShortName">memory[9:0][15:0]</obj_property>
-         <obj_property name="ObjectShortName">memory[9:0][15:0]</obj_property>
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_datamemory/memory">
+         <obj_property name="ElementShortName">memory[15:0]</obj_property>
+         <obj_property name="ObjectShortName">memory[15:0]</obj_property>
          <obj_property name="isExpanded"></obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_datamemory/o_OutData" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_datamemory/o_OutData">
          <obj_property name="ElementShortName">o_OutData[15:0]</obj_property>
          <obj_property name="ObjectShortName">o_OutData[15:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_datamemory/i_InData" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_datamemory/i_InData">
          <obj_property name="ElementShortName">i_InData[15:0]</obj_property>
          <obj_property name="ObjectShortName">i_InData[15:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_bip/u_datamemory/i_Addr" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_top/u_bip/u_datamemory/i_Addr">
          <obj_property name="ElementShortName">i_Addr[10:0]</obj_property>
          <obj_property name="ObjectShortName">i_Addr[10:0]</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="group1094" type="group">
+   <wvobject type="group" fp_name="group1094">
       <obj_property name="label">UartTx</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/tb_full/u_top/u_uart_tx/o_tx" type="logic">
+      <wvobject type="logic" fp_name="/tb_full/u_top/u_uart_tx/o_tx">
          <obj_property name="ElementShortName">o_tx</obj_property>
          <obj_property name="ObjectShortName">o_tx</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/u_uart_tx/o_tx_done" type="logic">
+      <wvobject type="logic" fp_name="/tb_full/u_top/u_uart_tx/o_tx_done">
          <obj_property name="ElementShortName">o_tx_done</obj_property>
          <obj_property name="ObjectShortName">o_tx_done</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_top/i_start" type="logic">
-         <obj_property name="ElementShortName">i_start</obj_property>
-         <obj_property name="ObjectShortName">i_start</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_full/u_top/i_data" type="array">
-         <obj_property name="ElementShortName">i_data[7:0]</obj_property>
-         <obj_property name="ObjectShortName">i_data[7:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="group114" type="group">
+      <wvobject type="group" fp_name="group114">
          <obj_property name="label">More</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <wvobject fp_name="/tb_full/i_stick" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/i_stick">
             <obj_property name="ElementShortName">i_stick</obj_property>
             <obj_property name="ObjectShortName">i_stick</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/u_top/u_uart_tx/state_reg" type="array">
+         <wvobject type="array" fp_name="/tb_full/u_top/u_uart_tx/state_reg">
             <obj_property name="ElementShortName">state_reg[1:0]</obj_property>
             <obj_property name="ObjectShortName">state_reg[1:0]</obj_property>
          </wvobject>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="group1095" type="group">
+   <wvobject type="group" fp_name="group1095">
       <obj_property name="label">UartRx</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/tb_full/u_uart_rx/state_reg" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_uart_rx/state_reg">
          <obj_property name="ElementShortName">state_reg[1:0]</obj_property>
          <obj_property name="ObjectShortName">state_reg[1:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_uart_rx/i_rx" type="logic">
+      <wvobject type="logic" fp_name="/tb_full/u_uart_rx/i_rx">
          <obj_property name="ElementShortName">i_rx</obj_property>
          <obj_property name="ObjectShortName">i_rx</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_uart_rx/o_rx" type="array">
+      <wvobject type="array" fp_name="/tb_full/u_uart_rx/o_rx">
          <obj_property name="ElementShortName">o_rx[7:0]</obj_property>
          <obj_property name="ObjectShortName">o_rx[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_full/u_uart_rx/o_rx_done" type="logic">
+      <wvobject type="logic" fp_name="/tb_full/u_uart_rx/o_rx_done">
          <obj_property name="ElementShortName">o_rx_done</obj_property>
          <obj_property name="ObjectShortName">o_rx_done</obj_property>
       </wvobject>
-      <wvobject fp_name="group1096" type="group">
+      <wvobject type="group" fp_name="group1096">
          <obj_property name="label">More</obj_property>
          <obj_property name="DisplayName">label</obj_property>
-         <wvobject fp_name="/tb_full/u_uart_rx/state_reg" type="array">
+         <wvobject type="array" fp_name="/tb_full/u_uart_rx/state_reg">
             <obj_property name="ElementShortName">state_reg[1:0]</obj_property>
             <obj_property name="ObjectShortName">state_reg[1:0]</obj_property>
          </wvobject>
-         <wvobject fp_name="/tb_full/rx_in" type="logic">
+         <wvobject type="logic" fp_name="/tb_full/rx_in">
             <obj_property name="ElementShortName">rx_in</obj_property>
             <obj_property name="ObjectShortName">rx_in</obj_property>
          </wvobject>

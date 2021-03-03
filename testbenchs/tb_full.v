@@ -36,16 +36,18 @@ module tb_full();
       clk       = 1'b0;
       rst_clk   = 1'b0;
       rst       = 1'b0;
-   
-      while(locked != 1'b1) begin
-        #10
-        rst_clk = 1'b1;
-      end
       
       #100
-      rst_clk = 1'b0;
-      rst     = 1'b0;
+      rst_clk   = 1'b1;
+      #50
+      rst_clk   = 1'b0;
       
+      while(locked != 1'b1) begin
+        #10
+        rst     = 1'b1;
+      end
+      
+      #100      
       count     = 1'b0;
       outData   = {NBITS_D{1'b0}};
       #100
