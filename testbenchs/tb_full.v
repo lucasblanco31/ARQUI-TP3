@@ -30,12 +30,13 @@ module tb_full();
     wire                             rx_in;
     wire                             rx_done;
     wire        [DBIT-1    :0]       rx_data;
+    wire                             clk_wzd;
         
     initial begin
       #10
       clk       = 1'b0;
       rst_clk   = 1'b0;
-      rst       = 1'b0;
+      rst       = 1'b1;
       
       #100
       rst_clk   = 1'b1;
@@ -106,7 +107,8 @@ module tb_full();
         .i_rst              (rst            ),
         .i_rst_clk          (rst_clk        ),
         .o_tx               (tx_out         ),
-        .o_locked           (locked         )         
+        .o_locked           (locked         ),
+        .o_clk_wzd          (clk_wzd        )         
     );
     
     uart_rx
@@ -116,7 +118,7 @@ module tb_full();
     )
     u_uart_rx
     (
-        .i_clk              (clk            ),
+        .i_clk              (clk_wzd        ),
         .i_reset            (rst            ),
         .i_rx               (rx_in          ),
         .i_s_tick           (i_stick        ),
@@ -132,9 +134,9 @@ module tb_full();
     )
     u_m_counter  
     (  
-        .i_clk            (clk        ),
-        .i_reset          (rst        ),  
-        .o_max_tick       (o_stick    )
+        .i_clk            (clk_wzd          ),
+        .i_reset          (rst              ),  
+        .o_max_tick       (o_stick          )
   ); 
   
    assign i_stick =     o_stick;

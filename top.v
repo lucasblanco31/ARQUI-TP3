@@ -19,7 +19,8 @@ module top
         input       wire        i_rst_clk,
         input       wire        i_rst,
         output      wire        o_tx,
-        output      wire        o_locked
+        output      wire        o_locked,
+        output      wire        o_clk_wzd
     );
       
     wire                            o_halt;
@@ -38,6 +39,7 @@ module top
     
     reg         [      2:0]         count;
        
+    assign o_clk_wzd = clk_out1;
    
     always @(negedge clk_out1)
     begin
