@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
-// Date        : Sat Feb 27 15:50:33 2021
-// Host        : ContactAR running 64-bit Ubuntu 20.04.2 LTS
-// Command     : write_verilog -force -mode synth_stub
-//               /home/lblanco/Documentos/Lucas/Arquitectura/TPS/TP3/ARQUI-TP3/TP3/TP3.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_stub.v
+// Tool Version: Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
+// Date        : Thu Mar  4 11:30:29 2021
+// Host        : DESKTOP-HLPDLR1 running 64-bit major release  (build 9200)
+// Command     : write_verilog -force -mode synth_stub -rename_top clk_wiz_0 -prefix
+//               clk_wiz_0_ clk_wiz_0_stub.v
 // Design      : clk_wiz_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a35tcpg236-1

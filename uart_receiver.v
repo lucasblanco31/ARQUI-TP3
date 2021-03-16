@@ -61,11 +61,14 @@ module uart_rx
         b_next              =   b_reg;
         case(state_reg)
             idle:
-                if(~i_rx)
-                    begin
-                        state_next  =   start;
-                        s_next      =   0;
-                    end
+                begin
+                    rx_done_next    =   0;
+                    if(~i_rx)
+                        begin
+                            state_next   =   start;
+                            s_next       =   0;
+                        end
+                end
             start:
                 if(i_s_tick)
                     if (s_reg==7)

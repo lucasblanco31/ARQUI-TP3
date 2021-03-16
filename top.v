@@ -12,7 +12,7 @@ module top
         parameter   DBIT      =    8,
         parameter   SBTICK    =   16,
         parameter   SIZ       =    8,
-        parameter   DIV       =    6 //10Mhz -> 115000baudrate
+        parameter   DIV       =   27 //10Mhz -> 115000baudrate
     )
     (
         input       wire        i_clk,
@@ -30,7 +30,7 @@ module top
     wire                            o_stick; 
     wire                            tx_done;
     
-    wire                            clk_out1;
+    wire                            o_clk_out1;
     
     reg                             i_start;
     reg         [DBIT-1 :0]         i_data;
@@ -39,9 +39,8 @@ module top
     
     reg         [      2:0]         count;
        
-    assign o_clk_wzd = clk_out1;
-   
-    always @(negedge clk_out1)
+      
+    always @(negedge o_clk_out1)
     begin
         case(count)
             2'b00:
@@ -90,7 +89,7 @@ module top
     )
     u_bip
     (
-        .i_clk              (clk_out1       ),
+        .i_clk              (o_clk_out1       ),
         .i_reset            (i_rst          ),
         .o_Halt             (o_halt         ),
         .o_ACC              (o_acc          )              
@@ -103,7 +102,7 @@ module top
     )
     u_uart_tx
     (
-        .i_clk              (clk_out1       ),
+        .i_clk              (o_clk_out1       ),
         .i_reset            (i_rst          ),
         .i_tx_start         (i_start        ),
         .i_s_tick           (i_stick        ),
@@ -119,20 +118,22 @@ module top
     )
     u_m_counter  
     (  
-        .i_clk              (clk_out1   ),
+        .i_clk              (o_clk_out1   ),
         .i_reset            (i_rst      ),  
         .o_max_tick         (o_stick    )
     ); 
 
     clk_wiz_0 my_clock(
     
-        .clk_out1           (clk_out1   ),
+        .clk_out1           (o_clk_out1   ),
         .reset              (i_rst_clk  ),
         .locked             (o_locked   ),
         .clk_in1            (i_clk      )
         
     );  
+    
    assign i_stick = o_stick;
+   assign o_clk_wzd = o_clk_out1;
     
 endmodule
  

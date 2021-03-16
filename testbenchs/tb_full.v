@@ -12,7 +12,7 @@ module tb_full();
     localparam  DBIT     =    8;
     localparam  SBTICK   =   16;
     localparam  SIZ      =    8;
-    localparam  DIV      =    6; //10Mhz -> 115000baudrate 
+    localparam  DIV      =   27; //50Mhz -> 115000baudrate 
     
    
     reg         rst_clk; //reset del clock
@@ -21,8 +21,10 @@ module tb_full();
     wire        locked;
     
     
-    reg         [NBITS_D-1 :0]       outData;         
-    reg                              count;                      
+    reg         [NBITS_D-1 :0]       out_data;
+    reg         [NBITS_D-1 :0]       out_data_next;       
+    reg                              count_reg;
+    reg                              count_next;                      
     
     wire                             i_stick;
     wire                             o_stick; 
@@ -30,7 +32,8 @@ module tb_full();
     wire                             rx_in;
     wire                             rx_done;
     wire        [DBIT-1    :0]       rx_data;
-    wire                             clk_wzd;
+    wire                             o_clk_wzd;
+    wire                             i_clk_wzd;
         
     initial begin
       #10
@@ -49,43 +52,54 @@ module tb_full();
       end
       
       #100      
-      count     = 1'b0;
-      outData   = {NBITS_D{1'b0}};
-      #100
       rst       = 1'b0;
-      #200000
+      #170000
       $finish();         
     end
     
-    always @(posedge clk)
+    always @(posedge o_clk_wzd, posedge rst)
+    if(rst)
+        begin
+            count_reg  <=  1'b0;
+            out_data   <=  {NBITS_D{1'b0}};
+        end
+     else
+        begin
+            out_data   <=  out_data_next;
+            count_reg  <=  count_next;
+        end              
+    
+    always @*
     begin
-        case(count)
+        count_next      =   count_reg;
+        out_data_next   =   out_data;
+        case(count_reg)
             1'b0:
                 begin
                     if(rx_done)
                     begin
-                        count                        =   count   +   1;
-                        outData[NBITS_D-DBIT-1: 0]   =   rx_data;   
+                        count_next                          =   count_reg  +   1;
+                        out_data_next[NBITS_D-DBIT-1: 0]    =   rx_data;   
                     end
                 end
             1'b1:
                 begin
                     if(rx_done)
                     begin
-                        count                       =    1'b0;
-                        outData[NBITS_D-1:DBIT]     =    rx_data;
+                        count_next                         =    1'b0;
+                        out_data_next[NBITS_D-1:DBIT]      =    rx_data;
                     end
                 end
             default:
                 begin
-                    outData   = {NBITS_D{1'b0}};
-                    count   = 1'b0;
+                    out_data_next   = {NBITS_D{1'b0}};
+                    count_next      = 1'b0;
                  end
          endcase
     end
      
     always begin
-      #50 
+      #5 
       clk = ~clk;
     end
     
@@ -108,7 +122,7 @@ module tb_full();
         .i_rst_clk          (rst_clk        ),
         .o_tx               (tx_out         ),
         .o_locked           (locked         ),
-        .o_clk_wzd          (clk_wzd        )         
+        .o_clk_wzd          (o_clk_wzd      )         
     );
     
     uart_rx
@@ -118,7 +132,7 @@ module tb_full();
     )
     u_uart_rx
     (
-        .i_clk              (clk_wzd        ),
+        .i_clk              (i_clk_wzd      ),
         .i_reset            (rst            ),
         .i_rx               (rx_in          ),
         .i_s_tick           (i_stick        ),
@@ -134,13 +148,14 @@ module tb_full();
     )
     u_m_counter  
     (  
-        .i_clk            (clk_wzd          ),
+        .i_clk            (i_clk_wzd        ),
         .i_reset          (rst              ),  
         .o_max_tick       (o_stick          )
   ); 
   
-   assign i_stick =     o_stick;
-   assign rx_in   =     tx_out;
+   assign i_stick   =     o_stick;
+   assign rx_in     =     tx_out;
+   assign i_clk_wzd =     o_clk_wzd;
     
 endmodule
  

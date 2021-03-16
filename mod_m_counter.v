@@ -1,13 +1,13 @@
 `timescale 1ns / 1ps
 /*
 M = ((1/(baudRate))/ticks)/(1/clockFrec)
-    ((1/19200)/16)/(1/10000000)
+    ((1/115000)/16)/(1/50000000)
 */
 
 module mod_m_counter  
    #(  
-    parameter   N=4, // number of bits in counter 1111   
-    parameter   M=15 // mod-M  
+    parameter   N=8, // number of bits in counter 1111   
+    parameter   M=27 // mod-M  
    )  
    (  
     input   wire            i_clk,
